@@ -1,3 +1,6 @@
+//use gcc prog.c -o prog.c
+// ./prog.c to run in vscode
+
 #include <stdio.h>
 #include <string.h>
 #define MAX 100
