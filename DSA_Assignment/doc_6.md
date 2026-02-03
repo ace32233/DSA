@@ -1,64 +1,53 @@
-#-- Min and Max Heap Builder in C --#
+# Min and Max Heap Builder in C
 
-This program demonstrates the implementation of Min Heap and Max Heap from an unsorted array using the C programming language.
 
-The heap is built using the efficient heapify-based approach.
 
-#-- Features --#
+## Features
 
-Build Max Heap from an unsorted array
+- Build a **Max Heap** from an unsorted array
+- Build a **Min Heap** from an unsorted array
+- Display the heap arrays
 
-Build Min Heap from an unsorted array
+---
 
-Display heap elements using array representation
+## Heap Properties
 
-#-- Heap Properties --#
+### Max Heap
+- Parent node is always **greater than or equal to** its children  
+- Root contains the **maximum** element
 
-#-- Max Heap --#
+### Min Heap
+- Parent node is always **less than or equal to** its children  
+- Root contains the **minimum** element
 
-Parent node is always greater than or equal to its children
+---
 
-Root node contains the maximum element
+## Array Representation
 
-#-- Min Heap --#
+For an element at index `i`:
 
-Parent node is always less than or equal to its children
+- **Left child:** `2*i + 1`
+- **Right child:** `2*i + 2`
+- **Parent:** `(i - 1) / 2`
 
-Root node contains the minimum element
+---
 
-#-- Array Representation --#
+## Algorithms
 
-The heap is stored in an array.
-For an element at index i:
+### Build Heap
+1. Start from the last non-leaf node at index `n/2 - 1`
+2. Apply the **heapify** operation moving backwards to the root
 
-Left Child → 2 * i + 1
+**Time Complexity:** `O(n)`
 
-Right Child → 2 * i + 2
+### Heapify
+1. Compare the node with its children  
+2. Swap with:
+   - the **largest child** (Max Heap), or
+   - the **smallest child** (Min Heap)
+3. Recursively heapify the affected subtree
 
-Parent → (i - 1) / 2
+**Time Complexity:** `O(log n)`
 
-#-- Algorithms --#
+---
 
-#-- Build Heap Algorithm --#
-
-Start from the last non-leaf node at index n / 2 - 1
-
-Apply the heapify operation
-
-Move backward until the root node
-
-Time Complexity: O(n)
-
-#-- Heapify Algorithm --#
-
-Compare the node with its left and right children
-
-Swap with:
-
-largest child for Max Heap
-
-smallest child for Min Heap
-
-Recursively heapify the affected subtree
-
-Time Complexity: O(log n)
