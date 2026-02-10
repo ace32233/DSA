@@ -1,45 +1,45 @@
-# Checking Balanced Parentheses Using Stack in C
+# doc_1 — Checking Balanced Parentheses (Stack in C)
 
-## a. How the data structures are defined
-A stack data structure is used to check whether the parentheses in an expression are balanced.  
-The stack is implemented using a character array, where each element stores an opening bracket such as `(`, `{`, or `[`.
+## (a) Data structure definition
+This program uses a **stack** to store **opening brackets** while scanning an input expression.
 
-### Explanation
-- `stack[MAX]` is used to store the brackets.
-- `top` keeps track of the current top position of the stack.
-- When `top` is `-1`, the stack is empty.
-- The stack works on the **First In, Last Out (FILO)** principle.
+**Stack representation**
+- `char stack[MAX]` stores bracket characters: `(`, `{`, `[`
+- `int top` stores the index of the current top element
+  - `top = -1` means **empty stack**
 
----
+This follows **FILO/LIFO** behavior: the last opening bracket seen must be the first one matched by a closing bracket.
 
-## b. Description of the functions used
+## (b) Functions implemented
+### `void push(char value)`
+- **Purpose:** Insert an opening bracket into the stack.
+- **Key behavior:** Increments `top` and stores `value` in `stack[top]` (after checking overflow).
 
-### 1. `push(char value)`
-- This function inserts an opening bracket into the stack.
-- It first checks whether the stack is full.
-- If free space is available, the bracket is added and `top` is increased.
-- This function is called whenever an opening bracket is found in the expression.
+### `char pop(void)`
+- **Purpose:** Remove and return the top bracket from the stack.
+- **Key behavior:** Returns `stack[top]` and decrements `top` (after checking underflow).
 
-### 2. `pop()`
-- This function removes and returns the top element from the stack.
-- It checks whether the stack is empty.
-- If the stack is not empty, the top element is removed and returned.
-- This function is called when a closing bracket is found in the expression.
+### `int balance(char exp[])`
+- **Purpose:** Check whether the brackets in `exp` are balanced.
+- **How it works:**
+  1. Scan characters in `exp` left to right.
+  2. If an opening bracket is found → `push()`.
+  3. If a closing bracket is found → `pop()` and verify it matches the correct opening type.
+  4. If a mismatch occurs or the stack is empty when trying to pop → **unbalanced**.
+  5. After scanning completes, if the stack is empty → **balanced**.
 
-### 3. `balance(char exp[])`
-- This is the main logic function to check balanced parentheses.
-- It scans the input expression one character at a time using a loop equal to the length of the expression.
-- Opening brackets are pushed onto the stack using `push()`.
-- When a closing bracket appears, `pop()` removes the top element and checks for a match.
-- If a mismatch is found, the function returns `0`, indicating the expression is unbalanced.
-- At the end, if the stack is empty, the expression is considered balanced.
+## (c) `main()` organization overview
+Typical `main()` flow:
+1. Declare a character array for the input expression.
+2. Read the expression from the user.
+3. Call `balance(expression)`.
+4. Print whether the expression is **Balanced** or **Not Balanced**.
 
----
+## (d) Sample output (complete run)
+```text
+Enter an expression: (a+b)*{c+[d-e]}
+Balanced Parentheses
 
-## c. Overview of `main()`
-The `main()` function manages the overall execution of the program. It performs the following steps:
-
-1. Declares a character array to store the input expression  
-2. Asks the user to enter the expression  
-3. Calls the `balance()` function to check the parentheses  
-4. Displays the result based on the returned value  
+Enter an expression: (a+b]*c
+Not Balanced Parentheses
+```
