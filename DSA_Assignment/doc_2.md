@@ -1,35 +1,45 @@
-# Infix to Postfix Conversion and Evaluation (C)
+# doc_2 — Infix to Postfix Conversion + Evaluation (Stack in C)
 
-This program converts an **infix expression** into a **postfix expression** and then **evaluates** the postfix expression using **stack**.  
----
-To convert an infix mathematical expression into postfix form and evaluate the postfix expression using stack operations.
----
+## (a) Data structure definition
+This program uses stacks for two different tasks:
 
-## Description
-- Infix expression is the normal mathematical expression (example: `3+5*2`)
-- Postfix expression does not use brackets (example: `352*+`)
-- Stack is used to store operators and operands
-- Operator precedence is maintained during conversion
----
-## Algorithm
-### Infix to Postfix Conversion
-1. Read the infix expression
-2. If operand is found, add it to postfix
-3. If `(` is found, push it into stack
-4. If `)` is found, pop elements until `(` is found
-5. If operator is found:
-   - Pop operators with higher or equal precedence
-   - Push current operator
-6. Pop remaining operators from stack
+1) **Operator stack** (during conversion)
+- Stores operators like `+ - * /` and parentheses `(` `)`
+- Implemented using an array and `top` index.
 
-### Postfix Evaluation
-1. Read postfix expression
-2. If operand is found, push it into stack
-3. If operator is found:
-   - Pop two operands
-   - Perform operation
-   - Push result back
-4. Final value in stack is the result
+2) **Operand stack** (during postfix evaluation)
+- Stores integer values (operands and intermediate results)
+- Implemented using an array and `top` index.
 
+## (b) Functions implemented
+*(Function names may vary slightly depending on your code; the roles are as follows.)*
 
+### `int precedence(char op)`
+- **Purpose:** Return the priority of an operator (e.g., `*` > `+`).
 
+### `void pushOp(char op)` / `char popOp(void)`
+- **Purpose:** Push/pop operators during infix→postfix conversion.
+
+### `void infixToPostfix(char infix[], char postfix[])`
+- **Purpose:** Convert an infix expression (e.g., `3+5*2`) to postfix (e.g., `352*+`).
+- **Logic:** Uses precedence rules and an operator stack to reorder operators correctly.
+
+### `void pushVal(int v)` / `int popVal(void)`
+- **Purpose:** Push/pop integer values during postfix evaluation.
+
+### `int evalPostfix(char postfix[])`
+- **Purpose:** Evaluate the postfix expression using an operand stack.
+- **Logic:** When an operator is found, pop two operands, apply the operation, and push the result back.
+
+## (c) `main()` organization overview
+Typical `main()` flow:
+1. Read the infix expression from the user.
+2. Convert infix → postfix and print the postfix string.
+3. Evaluate postfix and print the final answer.
+
+## (d) Sample output (complete run)
+```text
+Enter infix expression: 3+5*2
+Postfix expression: 352*+
+Result: 13
+```

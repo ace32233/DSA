@@ -1,27 +1,43 @@
-# Reverse Traversal of Singly Linked List
+# doc_3 — Reverse Traversal of Singly Linked List (Recursion in C)
 
-This program demonstrates **reverse traversal** of a **singly linked list** using **recursion**
+## (a) Data structure definition
+A **singly linked list** node is defined using a structure:
 
----
-## Description
+- `data` (integer value)
+- `next` (pointer to the next node)
 
-- A singly linked list contains nodes with two parts: data and a pointer to the next node.
-- Since a singly linked list cannot be traversed backward directly, **recursion** is used.
-- The list is traversed until the last node, and during return from recursive calls, elements are printed in reverse order.
-- The structure of the linked list remains unchanged.
----
-## Algorithm
+Example:
+```c
+struct Node {
+    int data;
+    struct Node* next;
+};
+```
 
-### Reverse Traversal Algorithm
-1. If the current node is `NULL`, stop the function.
-2. Call the function recursively for the next node.
-3. Print the data of the current node while returning.
----
-## Implementation
+Because it is singly linked, it can only move forward (`next`). To print in reverse, the program uses **recursion**.
 
-- Nodes are created dynamically using `malloc()`
-- `reverseTraversal()` function performs reverse traversal
-- `main()` function creates and links nodes and calls the traversal function
----
+## (b) Functions implemented
+### `struct Node* createNode(int value)`
+- **Purpose:** Allocate memory using `malloc()`, set `data`, set `next = NULL`, and return the node.
 
+### `void insertEnd(struct Node** head, int value)`
+- **Purpose:** Append a new node at the end of the list.
 
+### `void display(struct Node* head)`
+- **Purpose:** Print list elements in forward order.
+
+### `void reverseTraversal(struct Node* head)`
+- **Purpose:** Print list elements in reverse order without modifying links.
+- **Logic:** Recursively visit `next` until `NULL`, then print while returning.
+
+## (c) `main()` organization overview
+Typical `main()` flow:
+1. Create the list (manually or by inserting nodes).
+2. Print the list normally (optional).
+3. Call `reverseTraversal(head)` to print in reverse.
+
+## (d) Sample output (complete run)
+```text
+Linked List (forward): 10 20 30 40
+Reverse traversal: 40 30 20 10
+```
